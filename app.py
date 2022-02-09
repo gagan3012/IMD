@@ -21,3 +21,4 @@ def check_image(img_path):
     fig = check_forgery(MantraNetmodel, img_path=img_path, device=device)
     st.pyplot(fig)
 
+    # rgb = cv2.imread(img_path)
