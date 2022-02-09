@@ -27,4 +27,5 @@ def check_image(img_path):
     # st.pyplot(figure)
     return fig
 
+
 uploaded_image = st.file_uploader("Upload your image", type=["jpg", "png"])
