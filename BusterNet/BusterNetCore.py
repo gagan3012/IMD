@@ -79,3 +79,8 @@ class SelfCorrelationPercPooling(Layer):
             tf.matmul(x_3d, x_3d, transpose_a=False, transpose_b=True) / nb_feats
         )
         x_corr = K.reshape(x_corr_3d, tf.stack([-1, nb_rows, nb_cols, nb_maps]))
+        # argsort response maps along the translaton dimension
+        if self.nb_pools is not None:
+            ranks = K.cast(
+                K.round(tf.linspace(1.0, nb_maps - 1, self.nb_pools)), "int32"
+            )
