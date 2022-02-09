@@ -251,3 +251,9 @@ def create_cmfd_similarity_branch(
     f128 = Concatenate(axis=-1, name=name + "_dx8_m")([f128a, f128b])
     dx128 = BnInception(f128, 2, patch_list, name=bname + "_dx8")
     # Deconv x16
+    f256a = BilinearUpSampling2D(name=bname + "_bx16a")(f128a)
+    f256b = BilinearUpSampling2D(name=bname + "_bx16b")(dx128)
+    f256 = Concatenate(axis=-1, name=name + "_dx16_m")([f256a, f256b])
+    dx256 = BnInception(f256, 2, patch_list, name=bname + "_dx16")
+    # Summerize
+    fm256 = Concatenate(axis=-1, name=name + "_mfeat")([f256a, dx256])
