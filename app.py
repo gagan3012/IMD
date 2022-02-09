@@ -17,3 +17,4 @@ def check_image(img_path):
     device = "cpu"  # to change if you have a GPU with at least 12Go RAM (it will save you a lot of time !)
     MantraNetmodel = pre_trained_model(
         weight_path="MantraNet/MantraNetv4.pt", device=device
+    )
