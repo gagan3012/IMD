@@ -127,6 +127,7 @@ class ResizeBack(Layer):
     Input:
         x = tensor4d, (n_samples, n_rowsX, n_colsX, n_featsX )
         r = tensor4d, (n_samples, n_rowsR, n_colsR, n_featsR )
+    Output:
         xn = tensor4d, (n_samples, n_rowsR, n_colsR, n_featsX )
     """
 
