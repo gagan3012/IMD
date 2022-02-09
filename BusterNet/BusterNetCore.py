@@ -273,3 +273,8 @@ def create_cmfd_similarity_branch(
 
 def create_cmfd_manipulation_branch(img_shape=(256, 256, 3), name="maniDet"):
     """Create the manipulation branch for copy-move forgery detection"""
+    # ---------------------------------------------------------
+    # Input
+    # ---------------------------------------------------------
+    img_input = Input(shape=img_shape, name=name + "_in")
+    # ---------------------------------------------------------
