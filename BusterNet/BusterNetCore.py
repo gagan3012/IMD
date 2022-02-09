@@ -278,3 +278,10 @@ def create_cmfd_manipulation_branch(img_shape=(256, 256, 3), name="maniDet"):
     # ---------------------------------------------------------
     img_input = Input(shape=img_shape, name=name + "_in")
     # ---------------------------------------------------------
+    # VGG16 Conv Featex
+    # ---------------------------------------------------------
+    bname = name + "_cnn"
+    # Block 1
+    x1 = Conv2D(64, (3, 3), activation="relu", padding="same", name=bname + "_b1c1")(
+        img_input
+    )
