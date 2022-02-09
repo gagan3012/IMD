@@ -62,3 +62,5 @@ class SelfCorrelationPercPooling(Layer):
         x_pool = tensor4d, (n_samples, n_rows, n_cols, nb_pools)
     """
 
+        self.nb_pools = nb_pools
+        super(SelfCorrelationPercPooling, self).__init__(**kwargs)
