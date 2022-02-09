@@ -71,3 +71,7 @@ class SelfCorrelationPercPooling(Layer):
 
     def call(self, x, mask=None):
         # parse input feature shape
+        bsize, nb_rows, nb_cols, nb_feats = K.int_shape(x)
+        nb_maps = nb_rows * nb_cols
+        # self correlation
+        x_3d = K.reshape(x, tf.stack([-1, nb_maps, nb_feats]))
