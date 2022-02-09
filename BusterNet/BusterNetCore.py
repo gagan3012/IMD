@@ -227,3 +227,7 @@ def create_cmfd_similarity_branch(
     # ---------------------------------------------------------
     bname = name + "_corr"
     ## Self Correlation
+    xcorr = SelfCorrelationPercPooling(name=bname + "_corr")(xx)
+    ## Global Batch Normalization (across samples)
+    xn = BatchNormalization(name=bname + "_bn")(xcorr)
+    # ---------------------------------------------------------
