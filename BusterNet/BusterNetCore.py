@@ -127,3 +127,9 @@ class ResizeBack(Layer):
     Input:
         x = tensor4d, (n_samples, n_rowsX, n_colsX, n_featsX )
         r = tensor4d, (n_samples, n_rowsR, n_colsR, n_featsR )
+        xn = tensor4d, (n_samples, n_rowsR, n_colsR, n_featsX )
+    """
+
+    def call(self, x):
+        t, r = x
+        new_size = [tf.shape(r)[1], tf.shape(r)[2]]
