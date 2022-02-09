@@ -147,3 +147,9 @@ class Preprocess(Layer):
     More precisely, it does the following two things
     1) normalize input image size to (256,256) to speed up processing
     2) substract channel-wise means if necessary
+    """
+
+    def call(self, x, mask=None):
+        # parse input image shape
+        bsize, nb_rows, nb_cols, nb_colors = K.int_shape(x)
+        if (nb_rows != 256) or (nb_cols != 256):
