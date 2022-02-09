@@ -240,3 +240,8 @@ def create_cmfd_similarity_branch(
     # Deconv x2
     f32 = BilinearUpSampling2D(name=bname + "_bx2")(f16)
     dx32 = BnInception(f32, 6, patch_list, name=bname + "_dx2")
+    # Deconv x4
+    f64a = BilinearUpSampling2D(name=bname + "_bx4a")(f32)
+    f64b = BilinearUpSampling2D(name=bname + "_bx4b")(dx32)
+    f64 = Concatenate(axis=-1, name=name + "_dx4_m")([f64a, f64b])
+    dx64 = BnInception(f64, 4, patch_list, name=bname + "_dx4")
