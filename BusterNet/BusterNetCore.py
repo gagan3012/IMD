@@ -22,3 +22,6 @@ def std_norm_along_chs(x):
     std = K.maximum(1e-4, K.std(x, axis=-1, keepdims=True))
     return (x - avg) / std
 
+
+def BnInception(x, nb_inc=16, inc_filt_list=[(1, 1), (3, 3), (5, 5)], name="uinc"):
+    """Basic Google inception module with batch normalization
