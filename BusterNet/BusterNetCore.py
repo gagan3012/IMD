@@ -311,3 +311,86 @@ def create_cmfd_manipulation_branch(img_shape=(256, 256, 3), name="maniDet"):
         x3
     )
     x4 = Conv2D(512, (3, 3), activation="relu", padding="same", name=bname + "_b4c2")(
+        x4
+    )
+    x4 = Conv2D(512, (3, 3), activation="relu", padding="same", name=bname + "_b4c3")(
+        x4
+    )
+    x4 = MaxPooling2D((2, 2), strides=(2, 2), name=bname + "_b4p")(x4)
+    # ---------------------------------------------------------
+    # Deconvolution Network
+    # ---------------------------------------------------------
+    patch_list = [(1, 1), (3, 3), (5, 5)]
+    bname = name + "_dconv"
+    # MultiPatch Featex
+    f16 = BnInception(x4, 8, patch_list, name=bname + "_mpf")
+    # Deconv x2
+    f32 = BilinearUpSampling2D(name=bname + "_bx2")(f16)
+    dx32 = BnInception(f32, 6, patch_list, name=bname + "_dx2")
+    # Deconv x4
+    f64 = BilinearUpSampling2D(name=bname + "_bx4")(dx32)
+    dx64 = BnInception(f64, 4, patch_list, name=bname + "_dx4")
+    # Deconv x8
+    f128 = BilinearUpSampling2D(name=bname + "_bx8")(dx64)
+    dx128 = BnInception(f128, 2, patch_list, name=bname + "_dx8")
+    # Deconv x16
+    f256 = BilinearUpSampling2D(name=bname + "_bx16")(dx128)
+    dx256 = BnInception(f256, 2, [(5, 5), (7, 7), (11, 11)], name=bname + "_dx16")
+    # ---------------------------------------------------------
+    # Output for Auxiliary Task
+    # ---------------------------------------------------------
+    pred_mask = Conv2D(
+        1, (3, 3), activation="sigmoid", name=bname + "_pred_mask", padding="same"
+    )(dx256)
+    # ---------------------------------------------------------
+    # End to End
+    # ---------------------------------------------------------
+    model = Model(inputs=img_input, outputs=pred_mask, name=bname)
+    return model
+
+
+def create_BusterNet_testing_model(weight_file=None):
+    """create a busterNet testing model with pretrained weights"""
+    # 1. create branch model
+    simi_branch = create_cmfd_similarity_branch()
+    mani_branch = create_cmfd_manipulation_branch()
+    # 2. crop off the last auxiliary task layer
+    SimiDet = Model(
+        inputs=simi_branch.inputs,
+        outputs=simi_branch.layers[-2].output,
+        name="simiFeatex",
+    )
+    ManiDet = Model(
+        inputs=mani_branch.inputs,
+        outputs=mani_branch.layers[-2].output,
+        name="maniFeatex",
+    )
+    # 3. define the two-branch BusterNet model
+    # 3.a define wrapper inputs
+    img_raw = Input(shape=(None, None, 3), name="image_in")
+    img_in = Preprocess(name="preprocess")(img_raw)
+    # 3.b define BusterNet Core
+    simi_feat = SimiDet(img_in)
+    mani_feat = ManiDet(img_in)
+    merged_feat = Concatenate(axis=-1, name="merge")([simi_feat, mani_feat])
+    f = BnInception(merged_feat, 3, name="fusion")
+    mask_out = Conv2D(
+        3, (3, 3), padding="same", activation="softmax", name="pred_mask"
+    )(f)
+    # 3.c define wrapper output
+    mask_out = ResizeBack(name="restore")([mask_out, img_raw])
+    # 4. create BusterNet model end-to-end
+    model = Model(inputs=img_raw, outputs=mask_out, name="busterNet")
+    if weight_file is not None:
+        try:
+            model.load_weights(weight_file)
+            print(
+                "INFO: successfully load pretrained weights from {}".format(weight_file)
+            )
+        except Exception as e:
+            print(
+                "INFO: fail to load pretrained weights from {} for reason: {}".format(
+                    weight_file, e
+                )
+            )
+    return model
