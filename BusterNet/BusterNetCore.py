@@ -105,3 +105,10 @@ class SelfCorrelationPercPooling(Layer):
 class BilinearUpSampling2D(Layer):
     """Custom 2x bilinear upsampling layer
     Input:
+        x = tensor4d, (n_samples, n_rows, n_cols, n_feats)
+    Output:
+        x2 = tensor4d, (n_samples, 2*n_rows, 2*n_cols, n_feats)
+    """
+
+    def call(self, x, mask=None):
+        bsize, nb_rows, nb_cols, nb_filts = K.int_shape(x)
