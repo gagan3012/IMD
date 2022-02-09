@@ -18,3 +18,4 @@ def check_image(img_path):
     MantraNetmodel = pre_trained_model(
         weight_path="MantraNet/MantraNetv4.pt", device=device
     )
+    st.pyplot(fig)
