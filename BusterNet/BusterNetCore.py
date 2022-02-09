@@ -263,3 +263,7 @@ def create_cmfd_similarity_branch(
     # ---------------------------------------------------------
     pred_mask = Conv2D(
         1, (3, 3), activation="sigmoid", name=name + "_pred_mask", padding="same"
+    )(masks)
+    # ---------------------------------------------------------
+    # End to End
+    # ---------------------------------------------------------
