@@ -166,3 +166,13 @@ class Preprocess(Layer):
             # input is a 'uint8' image
             # substract channel-wise means
             xout = preprocess_input(x256)
+        return xout
+
+    def compute_output_shape(self, input_shape):
+        return (input_shape[0], 256, 256, 3)
+
+
+def create_cmfd_similarity_branch(
+    img_shape=(256, 256, 3), nb_pools=100, name="simiDet"
+):
+    """Create the similarity branch for copy-move forgery detection"""
