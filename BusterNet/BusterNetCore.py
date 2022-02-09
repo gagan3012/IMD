@@ -40,3 +40,7 @@ def BnInception(x, nb_inc=16, inc_filt_list=[(1, 1), (3, 3), (5, 5)], name="uinc
             ftuple,
             activation="linear",
             padding="same",
+            name=name + "_c%d" % idx,
+        )(x)
+        uc_list.append(uc)
+    if len(uc_list) > 1:
