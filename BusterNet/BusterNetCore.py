@@ -18,3 +18,7 @@ def std_norm_along_chs(x):
     Output:
         xn = tensor4d, same shape as x, normalized version of x
     """
+    avg = K.mean(x, axis=-1, keepdims=True)
+    std = K.maximum(1e-4, K.std(x, axis=-1, keepdims=True))
+    return (x - avg) / std
+
