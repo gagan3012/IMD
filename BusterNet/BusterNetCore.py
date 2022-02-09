@@ -290,3 +290,9 @@ def create_cmfd_manipulation_branch(img_shape=(256, 256, 3), name="maniDet"):
     # Block 2
     x2 = Conv2D(128, (3, 3), activation="relu", padding="same", name=bname + "_b2c1")(
         x1
+    )
+    x2 = Conv2D(128, (3, 3), activation="relu", padding="same", name=bname + "_b2c2")(
+        x2
+    )
+    x2 = MaxPooling2D((2, 2), strides=(2, 2), name=bname + "_b2p")(x2)
+    # Block 3
