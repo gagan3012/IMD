@@ -28,3 +28,7 @@ def BnInception(x, nb_inc=16, inc_filt_list=[(1, 1), (3, 3), (5, 5)], name="uinc
     Input:
         x = tensor4d, (n_samples, n_rows, n_cols, n_feats)
         nb_inc = int, number of filters in individual Conv2D
+        inc_filt_list = list of kernel sizes, individual Conv2D kernel size
+        name = str, name of module
+    Output:
+        xn = tensor4d, (n_samples, n_rows, n_cols, n_new_feats)
