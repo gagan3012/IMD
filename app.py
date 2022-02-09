@@ -10,3 +10,4 @@ device = "cpu"  # to change if you have a GPU with at least 12Go RAM (it will sa
 MantraNetmodel = pre_trained_model(
     weight_path="MantraNet/MantraNetv4.pt", device=device
 )
+# busterNetModel = create_BusterNet_testing_model( 'BusterNet/pretrained_busterNet.hd5' )
