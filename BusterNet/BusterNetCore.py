@@ -58,3 +58,7 @@ class SelfCorrelationPercPooling(Layer):
         nb_pools = int, number of percentile poolings
     Input:
         x = tensor4d, (n_samples, n_rows, n_cols, n_feats)
+    Output:
+        x_pool = tensor4d, (n_samples, n_rows, n_cols, nb_pools)
+    """
+
