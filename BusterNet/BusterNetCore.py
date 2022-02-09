@@ -65,3 +65,9 @@ class SelfCorrelationPercPooling(Layer):
     def __init__(self, nb_pools=256, **kwargs):
         self.nb_pools = nb_pools
         super(SelfCorrelationPercPooling, self).__init__(**kwargs)
+
+    def build(self, input_shape):
+        self.built = True
+
+    def call(self, x, mask=None):
+        # parse input feature shape
