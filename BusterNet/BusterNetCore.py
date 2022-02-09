@@ -91,3 +91,10 @@ class SelfCorrelationPercPooling(Layer):
         # NOTE: tf v1.1 only support indexing at the 1st dimension
         x_f1st_sort = K.permute_dimensions(x_sort, (3, 0, 1, 2))
         x_f1st_pool = tf.gather(x_f1st_sort, ranks)
+        x_pool = K.permute_dimensions(x_f1st_pool, (1, 2, 3, 0))
+        return x_pool
+
+    def compute_output_shape(self, input_shape):
+        bsize, nb_rows, nb_cols, nb_feats = input_shape
+        nb_pools = (
+            self.nb_pools if (self.nb_pools is not None) else (nb_rows * nb_cols - 1)
