@@ -12,3 +12,6 @@ import tensorflow as tf
 
 
 def std_norm_along_chs(x):
+    """Data normalization along the channle axis
+    Input:
+        x = tensor4d, (n_samples, n_rows, n_cols, n_feats)
