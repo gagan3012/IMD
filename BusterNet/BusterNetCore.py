@@ -209,3 +209,9 @@ def create_cmfd_similarity_branch(
         x3
     )
     x3 = MaxPooling2D((2, 2), strides=(2, 2), name=bname + "_b3p")(x3)
+    # Block 4
+    x4 = Conv2D(512, (3, 3), activation="relu", padding="same", name=bname + "_b4c1")(
+        x3
+    )
+    x4 = Conv2D(512, (3, 3), activation="relu", padding="same", name=bname + "_b4c2")(
+        x4
