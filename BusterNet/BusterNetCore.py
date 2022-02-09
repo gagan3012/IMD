@@ -75,3 +75,7 @@ class SelfCorrelationPercPooling(Layer):
         nb_maps = nb_rows * nb_cols
         # self correlation
         x_3d = K.reshape(x, tf.stack([-1, nb_maps, nb_feats]))
+        x_corr_3d = (
+            tf.matmul(x_3d, x_3d, transpose_a=False, transpose_b=True) / nb_feats
+        )
+        x_corr = K.reshape(x_corr_3d, tf.stack([-1, nb_rows, nb_cols, nb_maps]))
