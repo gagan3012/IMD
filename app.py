@@ -29,3 +29,4 @@ def check_image(img_path):
 
 
 uploaded_image = st.file_uploader("Upload your image", type=["jpg", "png"])
+    fig = check_image(os.path.join("images", uploaded_image.name))
