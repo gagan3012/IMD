@@ -22,3 +22,7 @@ def visualize_result(rgb, gt, pred, figsize=(12, 4), title=None):
     pyplot.imshow(gt)
     pyplot.subplot(133)
     pyplot.imshow(pred)
+    pyplot.title("busterNet pred")
+    if title is not None:
+        pyplot.suptitle(title)
+    return fig
