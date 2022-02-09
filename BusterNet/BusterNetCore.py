@@ -32,3 +32,7 @@ def BnInception(x, nb_inc=16, inc_filt_list=[(1, 1), (3, 3), (5, 5)], name="uinc
         name = str, name of module
     Output:
         xn = tensor4d, (n_samples, n_rows, n_cols, n_new_feats)
+    """
+    uc_list = []
+    for idx, ftuple in enumerate(inc_filt_list):
+        uc = Conv2D(
