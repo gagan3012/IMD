@@ -12,3 +12,8 @@ def simple_cmfd_decoder(busterNetModel, rgb):
 
 
 def visualize_result(rgb, gt, pred, figsize=(12, 4), title=None):
+    """Visualize raw input, ground truth, and BusterNet result"""
+    fig = pyplot.figure(figsize=figsize)
+    pyplot.subplot(131)
+    pyplot.imshow(rgb)
+    pyplot.title("input image")
