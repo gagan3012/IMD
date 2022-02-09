@@ -51,3 +51,5 @@ def BnInception(x, nb_inc=16, inc_filt_list=[(1, 1), (3, 3), (5, 5)], name="uinc
     xn = Activation("relu", name=name + "_re")(uc_norm)
     return xn
 
+class SelfCorrelationPercPooling(Layer):
+    """Custom Self-Correlation Percentile Pooling Layer
