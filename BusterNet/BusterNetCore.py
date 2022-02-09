@@ -84,3 +84,7 @@ class SelfCorrelationPercPooling(Layer):
             ranks = K.cast(
                 K.round(tf.linspace(1.0, nb_maps - 1, self.nb_pools)), "int32"
             )
+        else:
+            ranks = tf.range(1, nb_maps, dtype="int32")
+        x_sort, _ = tf.nn.top_k(x_corr, k=nb_maps, sorted=True)
+        # pool out x features at interested ranks
