@@ -1,2 +1,3 @@
 torch
 pytorch_lightning
+matplotlib
