@@ -134,3 +134,7 @@ class ResizeBack(Layer):
     def call(self, x):
         t, r = x
         new_size = [tf.shape(r)[1], tf.shape(r)[2]]
+
+    def compute_output_shape(self, input_shapes):
+        tshape, rshape = input_shapes
+        return (tshape[0],) + rshape[1:3] + (tshape[-1],)
