@@ -119,3 +119,10 @@ class BilinearUpSampling2D(Layer):
         bsize, nb_rows, nb_cols, nb_filts = input_shape
         return tuple([bsize, nb_rows * 2, nb_cols * 2, nb_filts])
 
+class ResizeBack(Layer):
+    """Custom bilinear resize layer
+    Resize x's spatial dimension to that of r
+
+    Input:
+        x = tensor4d, (n_samples, n_rowsX, n_colsX, n_featsX )
+        r = tensor4d, (n_samples, n_rowsR, n_colsR, n_featsR )
