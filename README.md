@@ -1,3 +1,14 @@
+---
+title: Image_Manipulation_detection
+emoji: 🚀
+colorFrom: pink
+colorTo: green
+sdk: streamlit
+app_file: app.py
+pinned: false
+license: mit
+---
+
 # Image manipulation detection
 
 Image manipulation detection is different from traditional semantic object detection because it pays more attention to tampering artifacts than to image content, which suggests that richer features need to be learned. In order to detect image manipulation, we have used different models and since they are trained on a variety of different data sources we have to build a robust system to detect image manipulation and forgery. 
