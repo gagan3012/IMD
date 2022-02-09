@@ -44,3 +44,7 @@ def BnInception(x, nb_inc=16, inc_filt_list=[(1, 1), (3, 3), (5, 5)], name="uinc
         )(x)
         uc_list.append(uc)
     if len(uc_list) > 1:
+        uc_merge = Concatenate(axis=-1, name=name + "_merge")(uc_list)
+    else:
+        uc_merge = uc_list[0]
+    uc_norm = BatchNormalization(name=name + "_bn")(uc_merge)
