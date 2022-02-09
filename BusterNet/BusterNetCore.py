@@ -112,3 +112,10 @@ class BilinearUpSampling2D(Layer):
 
     def call(self, x, mask=None):
         bsize, nb_rows, nb_cols, nb_filts = K.int_shape(x)
+        new_size = tf.constant([nb_rows * 2, nb_cols * 2], dtype=tf.int32)
+        return tf.image.resize(x, new_size)
+
+    def compute_output_shape(self, input_shape):
+        bsize, nb_rows, nb_cols, nb_filts = input_shape
+        return tuple([bsize, nb_rows * 2, nb_cols * 2, nb_filts])
+
