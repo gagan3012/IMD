@@ -221,3 +221,9 @@ def create_cmfd_similarity_branch(
     )
     x4 = MaxPooling2D((2, 2), strides=(2, 2), name=bname + "_b4p")(x4)
     # Local Std-Norm Normalization (within each sample)
+    xx = Activation(std_norm_along_chs, name=bname + "_sn")(x4)
+    # ---------------------------------------------------------
+    # Self Correlation Pooling
+    # ---------------------------------------------------------
+    bname = name + "_corr"
+    ## Self Correlation
