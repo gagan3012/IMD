@@ -10,3 +10,4 @@ def simple_cmfd_decoder(busterNetModel, rgb):
     pred = busterNetModel.predict(single_sample_batch)[0]
     return pred
 
+def visualize_result(rgb, gt, pred, figsize=(12, 4), title=None):
