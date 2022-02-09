@@ -231,3 +231,12 @@ def create_cmfd_similarity_branch(
     ## Global Batch Normalization (across samples)
     xn = BatchNormalization(name=bname + "_bn")(xcorr)
     # ---------------------------------------------------------
+    # Deconvolution Network
+    # ---------------------------------------------------------
+    patch_list = [(1, 1), (3, 3), (5, 5)]
+    # MultiPatch Featex
+    bname = name + "_dconv"
+    f16 = BnInception(xn, 8, patch_list, name=bname + "_mpf")
+    # Deconv x2
+    f32 = BilinearUpSampling2D(name=bname + "_bx2")(f16)
+    dx32 = BnInception(f32, 6, patch_list, name=bname + "_dx2")
