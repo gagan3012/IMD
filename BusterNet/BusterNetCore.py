@@ -88,3 +88,6 @@ class SelfCorrelationPercPooling(Layer):
             ranks = tf.range(1, nb_maps, dtype="int32")
         x_sort, _ = tf.nn.top_k(x_corr, k=nb_maps, sorted=True)
         # pool out x features at interested ranks
+        # NOTE: tf v1.1 only support indexing at the 1st dimension
+        x_f1st_sort = K.permute_dimensions(x_sort, (3, 0, 1, 2))
+        x_f1st_pool = tf.gather(x_f1st_sort, ranks)
