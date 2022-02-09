@@ -17,3 +17,8 @@ def visualize_result(rgb, gt, pred, figsize=(12, 4), title=None):
     pyplot.subplot(131)
     pyplot.imshow(rgb)
     pyplot.title("input image")
+    pyplot.subplot(132)
+    pyplot.title("ground truth")
+    pyplot.imshow(gt)
+    pyplot.subplot(133)
+    pyplot.imshow(pred)
