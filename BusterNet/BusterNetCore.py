@@ -36,3 +36,7 @@ def BnInception(x, nb_inc=16, inc_filt_list=[(1, 1), (3, 3), (5, 5)], name="uinc
     uc_list = []
     for idx, ftuple in enumerate(inc_filt_list):
         uc = Conv2D(
+            nb_inc,
+            ftuple,
+            activation="linear",
+            padding="same",
