@@ -153,3 +153,7 @@ class Preprocess(Layer):
         # parse input image shape
         bsize, nb_rows, nb_cols, nb_colors = K.int_shape(x)
         if (nb_rows != 256) or (nb_cols != 256):
+            # resize image if different from (256,256)
+            x256 = tf.image.resize(x, [256, 256], name="resize")
+        else:
+            x256 = x
