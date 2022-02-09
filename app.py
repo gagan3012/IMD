@@ -29,5 +29,6 @@ def check_image(img_path):
 
 
 uploaded_image = st.file_uploader("Upload your image", type=["jpg", "png"])
+    with open(os.path.join("images", uploaded_image.name), "wb") as f:
         f.write(uploaded_image.read())
     fig = check_image(os.path.join("images", uploaded_image.name))
