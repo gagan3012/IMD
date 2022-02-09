@@ -176,3 +176,7 @@ def create_cmfd_similarity_branch(
     img_shape=(256, 256, 3), nb_pools=100, name="simiDet"
 ):
     """Create the similarity branch for copy-move forgery detection"""
+    # ---------------------------------------------------------
+    # Input
+    # ---------------------------------------------------------
+    img_input = Input(shape=img_shape, name=name + "_in")
