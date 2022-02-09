@@ -23,3 +23,4 @@ def check_image(img_path):
 
     # rgb = cv2.imread(img_path)
     # pred = simple_cmfd_decoder( busterNetModel, rgb )
+    # figure = visualize_result( rgb, pred, pred, figsize=(20,20), title='BusterNet CMFD')
