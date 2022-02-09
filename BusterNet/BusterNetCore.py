@@ -257,3 +257,9 @@ def create_cmfd_similarity_branch(
     dx256 = BnInception(f256, 2, patch_list, name=bname + "_dx16")
     # Summerize
     fm256 = Concatenate(axis=-1, name=name + "_mfeat")([f256a, dx256])
+    masks = BnInception(fm256, 2, [(5, 5), (7, 7), (11, 11)], name=bname + "_dxF")
+    # ---------------------------------------------------------
+    # Output for Auxiliary Task
+    # ---------------------------------------------------------
+    pred_mask = Conv2D(
+        1, (3, 3), activation="sigmoid", name=name + "_pred_mask", padding="same"
