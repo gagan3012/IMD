@@ -157,3 +157,12 @@ class Preprocess(Layer):
             x256 = tf.image.resize(x, [256, 256], name="resize")
         else:
             x256 = x
+        # substract channel means if necessary
+        if K.dtype(x) == "float32":
+            # input is not a 'uint8' image
+            # assume it has already been normalized
+            xout = x256
+        else:
+            # input is a 'uint8' image
+            # substract channel-wise means
+            xout = preprocess_input(x256)
