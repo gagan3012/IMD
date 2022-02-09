@@ -98,3 +98,10 @@ class SelfCorrelationPercPooling(Layer):
         bsize, nb_rows, nb_cols, nb_feats = input_shape
         nb_pools = (
             self.nb_pools if (self.nb_pools is not None) else (nb_rows * nb_cols - 1)
+        )
+        return tuple([bsize, nb_rows, nb_cols, nb_pools])
+
+
+class BilinearUpSampling2D(Layer):
+    """Custom 2x bilinear upsampling layer
+    Input:
