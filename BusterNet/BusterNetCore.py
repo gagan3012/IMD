@@ -54,3 +54,7 @@ def BnInception(x, nb_inc=16, inc_filt_list=[(1, 1), (3, 3), (5, 5)], name="uinc
 
 class SelfCorrelationPercPooling(Layer):
     """Custom Self-Correlation Percentile Pooling Layer
+    Arugment:
+        nb_pools = int, number of percentile poolings
+    Input:
+        x = tensor4d, (n_samples, n_rows, n_cols, n_feats)
