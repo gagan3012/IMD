@@ -7,3 +7,8 @@ from tensorflow.keras.layers import Layer, Input, Lambda
 from tensorflow.keras.layers import BatchNormalization, Activation, Concatenate
 from tensorflow.keras.models import Model
 from tensorflow.keras.applications.vgg16 import preprocess_input
+from tensorflow.keras import backend as K
+import tensorflow as tf
+
+
+def std_norm_along_chs(x):
