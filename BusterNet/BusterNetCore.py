@@ -139,3 +139,11 @@ class ResizeBack(Layer):
     def compute_output_shape(self, input_shapes):
         tshape, rshape = input_shapes
         return (tshape[0],) + rshape[1:3] + (tshape[-1],)
+
+
+class Preprocess(Layer):
+    """Basic preprocess layer for BusterNet
+
+    More precisely, it does the following two things
+    1) normalize input image size to (256,256) to speed up processing
+    2) substract channel-wise means if necessary
