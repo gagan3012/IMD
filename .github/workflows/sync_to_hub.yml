@@ -17,5 +17,5 @@ jobs:
       - name: Push to hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: git push https://gagan3012:$HF_TOKEN@huggingface.co/spaces/gagan3012/Image_Manipulation_detection main --force
+        run: git push https://gagan3012:$HF_TOKEN@huggingface.co/spaces/gagan3012/IMD main --force
 
